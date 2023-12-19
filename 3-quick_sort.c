@@ -7,7 +7,7 @@
  * @high_idx: index of last element
  * Return: int
  */
-int arr_partition(int *array, int low_idx, int high_idx)
+int arr_partition(int *array, int low_idx, int high_idx, int len)
 {
 	int i, j, temp, pivot;
 
@@ -22,16 +22,13 @@ int arr_partition(int *array, int low_idx, int high_idx)
 			temp = array[j];
 			array[j] = array[i];
 			array[i] = temp;
-			print_array(array, high_idx + 1);
 		}
 	}
 
 	temp = array[j + 1];
 	array[j + 1] = array[high_idx];
 	array[high_idx] = temp;
-
-	if ((j + 1) != high_idx)
-		print_array(array, high_idx + 1);
+	print_array(array, len);
 
 	return (j + 1);
 }
@@ -42,15 +39,15 @@ int arr_partition(int *array, int low_idx, int high_idx)
  * @low_idx: least index
  * @high_idx: highest index
  */
-void quick_sort_recursive(int *arr, int low_idx, int high_idx)
+void quick_sort_recursive(int *arr, int low_idx, int high_idx, int len)
 {
 	int result;
 
 	if (low_idx < high_idx)
 	{
-		result = arr_partition(arr, low_idx, high_idx);
-		quick_sort_recursive(arr, 0, result - 1);
-		quick_sort_recursive(arr, result + 1, high_idx);
+		result = arr_partition(arr, low_idx, high_idx, len);
+		quick_sort_recursive(arr, low_idx, result - 1, len);
+		quick_sort_recursive(arr, result + 1, high_idx, len);
 	}
 }
 
@@ -62,5 +59,5 @@ void quick_sort_recursive(int *arr, int low_idx, int high_idx)
  */
 void quick_sort(int *array, size_t size)
 {
-	quick_sort_recursive(array, 0, size - 1);
+	quick_sort_recursive(array, 0, size - 1, size);
 }
