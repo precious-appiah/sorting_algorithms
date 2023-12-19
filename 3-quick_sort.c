@@ -5,6 +5,7 @@
  * @array: array to be partitioned
  * @low_idx: index of first element
  * @high_idx: index of last element
+ * @len: len of original array
  * Return: int
  */
 int arr_partition(int *array, int low_idx, int high_idx, int len)
@@ -38,6 +39,7 @@ int arr_partition(int *array, int low_idx, int high_idx, int len)
  * @arr: array to be sorted
  * @low_idx: least index
  * @high_idx: highest index
+ * @len: len of original array
  */
 void quick_sort_recursive(int *arr, int low_idx, int high_idx, int len)
 {
