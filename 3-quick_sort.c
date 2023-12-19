@@ -8,7 +8,7 @@
  * @len: len of original array
  * Return: int
  */
-int arr_partition(int *array, int low_idx, int high_idx, int len)
+int arr_partition(int *array, int low_idx, int high_idx, size_t len)
 {
 	int i, j, temp, pivot;
 
@@ -20,16 +20,25 @@ int arr_partition(int *array, int low_idx, int high_idx, int len)
 		if (array[i] < pivot)
 		{
 			j += 1;
-			temp = array[j];
-			array[j] = array[i];
-			array[i] = temp;
+
+			if (array[i] != array[j])
+			{
+				temp = array[j];
+				array[j] = array[i];
+				array[i] = temp;
+				print_array(array, len);
+			}
+
 		}
 	}
 
-	temp = array[j + 1];
-	array[j + 1] = array[high_idx];
-	array[high_idx] = temp;
-	print_array(array, len);
+	if (array[j + 1] != array[high_idx])
+	{
+		temp = array[j + 1];
+		array[j + 1] = array[high_idx];
+		array[high_idx] = temp;
+		print_array(array, len);
+	}
 
 	return (j + 1);
 }
@@ -41,7 +50,7 @@ int arr_partition(int *array, int low_idx, int high_idx, int len)
  * @high_idx: highest index
  * @len: len of original array
  */
-void quick_sort_recursive(int *arr, int low_idx, int high_idx, int len)
+void quick_sort_recursive(int *arr, int low_idx, int high_idx, size_t len)
 {
 	int result;
 
